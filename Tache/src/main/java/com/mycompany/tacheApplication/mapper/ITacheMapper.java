@@ -1,9 +1,6 @@
 package com.mycompany.tacheApplication.mapper;
 
-import com.mycompany.tacheApplication.dto.StatutResponseDTO;
-import com.mycompany.tacheApplication.dto.TacheRequestDTO;
-import com.mycompany.tacheApplication.dto.TacheResponseDTO;
-import com.mycompany.tacheApplication.dto.TacheResponseDTO2;
+import com.mycompany.tacheApplication.dto.*;
 import com.mycompany.tacheApplication.entity.Statut;
 import com.mycompany.tacheApplication.entity.Tache;
 import org.mapstruct.Mapper;
@@ -16,4 +13,6 @@ public interface ITacheMapper {
 
     Tache tacheRequestDTOToTache(TacheRequestDTO tacheRequestDTO);
     Statut statutResponseDTOToStatut(StatutResponseDTO statutResponseDTO);
+
+    EditResponseDTO TacheToEditResponseDTO(Tache tache);
 }

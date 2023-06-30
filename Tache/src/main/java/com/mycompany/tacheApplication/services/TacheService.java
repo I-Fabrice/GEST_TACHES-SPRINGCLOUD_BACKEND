@@ -5,9 +5,9 @@ import com.mycompany.tacheApplication.entity.Statut;
 import com.mycompany.tacheApplication.entity.Tache;
 import com.mycompany.tacheApplication.mapper.ITacheMapper;
 import com.mycompany.tacheApplication.openfeign.IStatutRestClient;
+import com.mycompany.tacheApplication.openfeign.ITacheCompteRestClient;
 import com.mycompany.tacheApplication.repository.ITacheRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,13 +20,15 @@ public class TacheService implements ITacheService {
 
 
     private final ITacheRepository repository;
-
     private final IStatutRestClient restClient;
+
+    private final ITacheCompteRestClient tacheRestClient;
     private final ITacheMapper mapper;
 
-    public TacheService(ITacheRepository repository, IStatutRestClient restClient, ITacheMapper mapper) {
+    public TacheService(ITacheRepository repository, IStatutRestClient restClient, ITacheCompteRestClient tacheRestClient, ITacheMapper mapper) {
         this.repository = repository;
         this.restClient = restClient;
+        this.tacheRestClient = tacheRestClient;
         this.mapper = mapper;
     }
 
@@ -82,6 +84,8 @@ public class TacheService implements ITacheService {
 
     @Override
     public String editTache(TacheRequestDTO tacheRequestDTO) {
+        List<TacheCompteRequestDTO> list = new ArrayList<>();
+
         if(!repository.findById(tacheRequestDTO.getRef()).isPresent() || repository.findById(tacheRequestDTO.getRef()).get().isDeleted())
             throw  new RuntimeException("Exception : tache not find or deleted");
         else{
@@ -99,6 +103,15 @@ public class TacheService implements ITacheService {
             data.setStatutId(tache.getStatutId());
 
             data.setStatut(tache.getStatut());
+
+            if(tacheRequestDTO.getCompteId() != null){
+                tacheRequestDTO.getCompteId().forEach(item->{
+                    list.add(new TacheCompteRequestDTO(tacheRequestDTO.getRef(), item.getCompteId()));
+                });
+                tacheRestClient.create(list);
+            }
+
+
 
             repository.save(data);
 
@@ -212,6 +225,44 @@ public class TacheService implements ITacheService {
             throw new RuntimeException("Exception : tache not find ! ");
         }
 
+
+    }
+
+    @Override
+    public EditResponseDTO getTache(Long ref) {
+        if(!repository.findById(ref).isPresent() || repository.findById(ref).get().isDeleted()){
+            throw new RuntimeException("Exception : this Task probably has deleted !");
+        }
+        else{
+            Tache tache = repository.findById(ref).get();
+
+            EditResponseDTO data = mapper.TacheToEditResponseDTO(tache);
+            data.setCompteResponseDTOS(tacheRestClient.getAllTacheCompteByTacheId(tache.getRef()));
+
+            return data;
+        }
+    }
+
+    @Override
+    public List<TacheResponseDTO> loadAlltache() {
+        List<TacheResponseDTO> data = new ArrayList<>();
+
+
+        repository.findAll().forEach(tache ->
+        {
+            if(!tache.isDeleted()){
+
+                StatutResponseDTO statutResponseDTO = restClient.loadStatutById(tache.getStatutId());
+
+                TacheResponseDTO tacheResponseDTO = mapper.tacheToTacheResponseDTO(tache);
+                tacheResponseDTO.setStatutResponseDTO(statutResponseDTO);
+
+                data.add(tacheResponseDTO);
+
+            }
+        });
+
+        return data;
 
     }
 

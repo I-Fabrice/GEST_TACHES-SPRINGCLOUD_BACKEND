@@ -3,10 +3,7 @@ package com.mycompany.statutApplication.controller;
 import com.mycompany.statutApplication.dto.StatutResponseDTO;
 import com.mycompany.statutApplication.entity.Statut;
 import com.mycompany.statutApplication.services.IStatutService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/statut")
@@ -18,6 +15,7 @@ public class StatutController {
         this.service = service;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("{ref}")
     public StatutResponseDTO loadStatutById(@PathVariable Long ref) {
         try{
@@ -27,6 +25,7 @@ public class StatutController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/ds/{designation}")
     public Statut loadByDesignation(@PathVariable String designation) {
         try{

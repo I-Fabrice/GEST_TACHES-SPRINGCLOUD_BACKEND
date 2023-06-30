@@ -28,4 +28,9 @@ public class CompteService implements  ICompteService{
             throw  new RuntimeException("Exception : Compte not find !");
         }
     }
+
+    @Override
+    public Compte loadByEmail(String email) {
+        return repository.findCompteByEmail(email);
+    }
 }

@@ -19,9 +19,10 @@
         </processorPath>
         <module name="Statut" />
         <module name="Projet" />
-        <module name="Groupe" />
         <module name="Compte" />
+        <module name="Groupe" />
         <module name="Fichier" />
+        <module name="Tache_Compte" />
         <module name="Tache" />
         <module name="Projet_Compte" />
       </profile>
@@ -36,6 +37,7 @@
       <module name="Projet_Compte" options="-Amapstruct.defaultComponentModel=spring" />
       <module name="Statut" options="-Amapstruct.defaultComponentModel=spring" />
       <module name="Tache" options="-Amapstruct.defaultComponentModel=spring" />
+      <module name="Tache_Compte" options="-Amapstruct.defaultComponentModel=spring" />
     </option>
   </component>
 </project>

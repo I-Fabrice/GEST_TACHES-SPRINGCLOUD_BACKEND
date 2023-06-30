@@ -1,5 +1,6 @@
 package com.mycompany.tacheApplication.mapper;
 
+import com.mycompany.tacheApplication.dto.EditResponseDTO;
 import com.mycompany.tacheApplication.dto.StatutResponseDTO;
 import com.mycompany.tacheApplication.dto.TacheRequestDTO;
 import com.mycompany.tacheApplication.dto.TacheResponseDTO;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-07T16:45:43+0100",
+    date = "2023-06-24T21:49:29+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 19.0.1 (Oracle Corporation)"
 )
 @Component
@@ -27,6 +28,7 @@ public class ITacheMapperImpl implements ITacheMapper {
 
         tacheResponseDTO.setRef( tache.getRef() );
         tacheResponseDTO.setDesignation( tache.getDesignation() );
+        tacheResponseDTO.setGroupeId( tache.getGroupeId() );
 
         return tacheResponseDTO;
     }
@@ -76,5 +78,21 @@ public class ITacheMapperImpl implements ITacheMapper {
         statut.setDesignation( statutResponseDTO.getDesignation() );
 
         return statut;
+    }
+
+    @Override
+    public EditResponseDTO TacheToEditResponseDTO(Tache tache) {
+        if ( tache == null ) {
+            return null;
+        }
+
+        EditResponseDTO editResponseDTO = new EditResponseDTO();
+
+        editResponseDTO.setRef( tache.getRef() );
+        editResponseDTO.setDescription( tache.getDescription() );
+        editResponseDTO.setDelai( tache.getDelai() );
+        editResponseDTO.setPriority( tache.isPriority() );
+
+        return editResponseDTO;
     }
 }

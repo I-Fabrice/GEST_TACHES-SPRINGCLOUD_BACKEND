@@ -23,6 +23,10 @@ public interface ITacheService {
 
     String setStatut(StatutRequestDTO statutRequestDTO);
 
+    EditResponseDTO getTache(Long ref);
+
+    List<TacheResponseDTO> loadAlltache();
+
     // String setDescription(DescriptionRequestDTO descriptionRequestDTO);
 
     // Date setDelai(DelaiRequestDTO delaiRequestDTO);

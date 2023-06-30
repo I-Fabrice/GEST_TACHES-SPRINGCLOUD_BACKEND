@@ -19,6 +19,7 @@ public class GroupeController {
         this.service = service;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("{ref}")
     public Groupe loadById(@PathVariable Long ref) {
         try {
@@ -28,6 +29,7 @@ public class GroupeController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("ld/{projetId}")
     public List<GroupeResponseDTO> loadGroupesByprojetId(@PathVariable Long projetId) {
         try{
@@ -37,6 +39,7 @@ public class GroupeController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("{projetId}")
     public GroupeResponseDTO create(@PathVariable Long projetId) {
         try{
@@ -47,6 +50,7 @@ public class GroupeController {
 
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("edit")
     public String setDesignation(@RequestBody DesignationRequestDTO designationRequestDTO) {
        try{
@@ -56,6 +60,7 @@ public class GroupeController {
        }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("{ref}")
     public String deleteGroupe(@PathVariable Long ref) {
         try{

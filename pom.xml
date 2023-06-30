@@ -16,6 +16,7 @@
     <module>Statut</module>
     <module>Fichier</module>
       <module>Projet_Compte</module>
+      <module>Tache_Compte</module>
   </modules>
 
   <name>mypfa-springcloud</name>

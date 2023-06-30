@@ -17,6 +17,7 @@ public class ProjetCompteController {
         this.service = service;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("cr")
     public ProjetResponseDTO create(@RequestBody ProjetCompteRequestDTO projetCompteRequestDTO) {
 
@@ -28,6 +29,7 @@ public class ProjetCompteController {
 
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("{compteId}")
     public List<ProjetResponseDTO> loadProjetsByCompte(@PathVariable Long compteId) {
 

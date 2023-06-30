@@ -1,0 +1,20 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: tachecompte
+  datasource:
+    url: jdbc:mysql://localhost:3306/tachecompte?serverTimezone=UTC
+    username: 'root'
+    password: ''
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+  cloud:
+    loadbalancer:
+      ribbon:
+        enable: false

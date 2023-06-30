@@ -6,4 +6,6 @@ public interface ICompteService {
 
     void createCompte(Compte compte);
     Compte loadById(Long ref);
+
+    Compte loadByEmail(String email);
 }

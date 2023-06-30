@@ -10,6 +10,7 @@ public class TacheResponseDTO {
 
     private Long   ref;
     private String designation;
+    private Long groupeId;
     private StatutResponseDTO statutResponseDTO;
 
 }

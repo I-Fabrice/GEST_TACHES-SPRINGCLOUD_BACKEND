@@ -15,6 +15,7 @@ public class ProjetController {
         this.service = service;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("{designation}")
     public ProjetResponseDTO create(@PathVariable String designation) {
         try{
@@ -24,6 +25,7 @@ public class ProjetController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("{ref}")
     public ProjetResponseDTO loadProjetByRef(@PathVariable Long ref) {
         try{
@@ -33,6 +35,7 @@ public class ProjetController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("edit")
     public String setDesignation(@RequestBody DesignationRequestDTO designationRequestDTO) {
         try{
@@ -42,6 +45,7 @@ public class ProjetController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("{ref}")
     public String deleteProjet(@PathVariable Long ref) {
         try{
