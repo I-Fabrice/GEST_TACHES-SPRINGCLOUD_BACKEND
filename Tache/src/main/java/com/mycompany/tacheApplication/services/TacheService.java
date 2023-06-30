@@ -101,6 +101,7 @@ public class TacheService implements ITacheService {
 
             data.setGroupeId(tache.getGroupeId());
             data.setStatutId(tache.getStatutId());
+            data.setPriority(tacheRequestDTO.isPriority());
 
             data.setStatut(tache.getStatut());
 
